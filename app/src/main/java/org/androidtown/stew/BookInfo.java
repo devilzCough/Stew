@@ -18,6 +18,10 @@ public class BookInfo {
         // String[] strUser = new String[nUsers];
     }
 
+    public String getStrDate() { return strDate; }
+    public String getStrTime() { return strTime; }
+    public String getStrRoom() { return strRoom; }
+
     public void setStrDate(String _date) {
         strDate = _date;
     }

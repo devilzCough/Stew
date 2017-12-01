@@ -45,7 +45,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.detailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,item.getBookInfo(),Toast.LENGTH_SHORT).show();
+
+                // test code : insert information
+                BookInfo info = new BookInfo();
+                info.setStrDate("2017/12/05");
+                info.setStrTime("10:00 부터 1시간");
+                info.setStrRoom("02 스터디룸(7층)");
+                info.setStrUsers("이승진 14010969");
+
+                CustomDialog alert = new CustomDialog(context, StewConstant.INFO_DIALOG, info);
             }
         });
 

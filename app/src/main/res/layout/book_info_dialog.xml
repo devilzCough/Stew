@@ -33,6 +33,7 @@
                 android:id="@+id/lblDate"
                 android:layout_gravity="fill"
                 android:text=""
+                android:lines="2"
                 android:layout_columnWeight="2"
                 />
         </TableRow>
@@ -71,6 +72,7 @@
     </TableLayout>
 
     <Button
+        android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"/>

@@ -38,14 +38,13 @@ public class MyListFragment extends Fragment{
 
         nInfo = bookInfo.length;
         List<CustomBookCard> items=new ArrayList<>();
-        CustomBookCard[] item=new CustomBookCard[nInfo];
+        CustomBookCard[] item = new CustomBookCard[nInfo];
         for (int i = 0; i < nInfo; i++) {
             item[i] = new CustomBookCard(bookInfo[i]);
             items.add(item[i]);
         }
         /*item[0]=new CustomBookCard(bookInfo[0]);
         item[1]=new CustomBookCard(bookInfo[1]);*/
-
 
         /*for (int i=0;i<2;i++) items.add(item[i]);*/
 

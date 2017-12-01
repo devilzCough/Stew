@@ -44,5 +44,29 @@ public class CustomDialog extends Dialog {
 
         super(context);
         final Dialog dialog = new Dialog(context);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.book_info_dialog);
+
+        TextView textDate = (TextView) dialog.findViewById(R.id.lblDate);
+        textDate.setText(info.getStrDate() + "\n" +  info.getStrTime());
+
+        TextView textRoom = (TextView) dialog.findViewById(R.id.lblRoom);
+        textRoom.setText(info.getStrRoom());
+
+        /*TextView textUser = (TextView) dialog.findViewById(R.id.lblUser);
+        textDate.setText(info.getStrRoom());*/
+
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btnClose);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
