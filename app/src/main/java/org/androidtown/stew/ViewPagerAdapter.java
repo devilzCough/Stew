@@ -16,12 +16,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.tabs = tabs;
     }
-
     @Override
     public Fragment getItem(int i) {
-        return FloorFragment.newInstance(String.format("%s Fragment", tabs[i]));
+        return FloorFragment.newInstance(i);
     }
-
     @Override
     public int getCount() {
         return tabs.length;

@@ -18,7 +18,7 @@ public class CustomDialog extends Dialog {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.dialog);
+        dialog.setContentView(R.layout.dialog_warning);
 
         TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
         text.setText(msg);

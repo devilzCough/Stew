@@ -5,36 +5,70 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 /**
  * Created by limjeonghyun on 2017. 11. 30..
  */
 
 public class FloorFragment extends Fragment{
+    int floorOrder;
+    int nRoom[] = {13,11,6,4};
+    int startNum[] = {1,14,25,1};
     String label;
+
+
     public FloorFragment(){
 
     }
 
-    public static FloorFragment newInstance(String fragmentLabel) {
+    public static FloorFragment newInstance(int floor) {
         FloorFragment fragment = new FloorFragment();
         Bundle args = new Bundle();
-        args.putString("label", fragmentLabel);
+        args.putInt("floor_num",floor);
         fragment.setArguments(args);
         return fragment;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_floor, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.label);
+        int col=0;
+        int roomNum;
 
-        //If the fragment was created by the TabHost, return empty view
+        View view = inflater.inflate(R.layout.fragment_floor, container, false);
+        TableLayout tableLayout = (TableLayout)view.findViewById(R.id.tableLayout);
+
         if(getArguments() == null) return view;
 
-        label = getArguments().getString("label", "");
+        floorOrder = getArguments().getInt("floor_num",0);
 
-        tv.setText(label);
+        TableRow.LayoutParams buttonLayout = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        buttonLayout.setMargins(15,10,15,10);
+
+        for(int i=0;i<(nRoom[floorOrder]/3)+1;i++){
+            TableRow tableRow = new TableRow(getActivity());
+            tableRow.setGravity(View.TEXT_ALIGNMENT_CENTER);
+            if(i == (nRoom[floorOrder]/3))
+                col = nRoom[floorOrder]%3;
+            else col = 3;
+
+            for(int j=0;j<col;j++){
+                roomNum = startNum[floorOrder]+(i*3)+j;
+
+                Button button = new Button(getActivity());
+                button.setText("Room "+roomNum);
+                button.setTextSize(13);
+                button.setHeight(120);
+                button.setPadding(40,10,40,10);
+                button.setTextColor(getResources().getColor(R.color.stewColor));
+                button.setBackgroundResource(R.drawable.room_button);
+                button.setLayoutParams(buttonLayout);
+                tableRow.addView(button);
+            }
+            tableLayout.addView(tableRow);
+        }
+
         return view;
     }
 }

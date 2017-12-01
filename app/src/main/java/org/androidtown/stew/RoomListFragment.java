@@ -49,9 +49,6 @@ public class RoomListFragment extends Fragment {
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-            /**
-             * on swipe select the respective tab
-             * */
             @Override
             public void onPageSelected(int position) {
 
@@ -82,9 +79,7 @@ public class RoomListFragment extends Fragment {
     private void initializeHorizontalTabs() {
         LinearLayout ll = (LinearLayout) tabWidget.getParent();
         horizontalScrollView = new HorizontalScrollView(getActivity());
-        horizontalScrollView.setLayoutParams(new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT));
+        horizontalScrollView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         ll.addView(horizontalScrollView, 0);
         ll.removeView(tabWidget);
         horizontalScrollView.addView(tabWidget);
@@ -109,7 +104,7 @@ public class RoomListFragment extends Fragment {
     private void setupTabHost() {
 
         for(int i=0; i<tabs.length; i++) {
-            tabHost.addTab(tabHost.newTabSpec(String.format("%sTab", tabs[i].replace(" ","").toLowerCase())).setIndicator(tabs[i]), FloorFragment.class, null);
+            tabHost.addTab(tabHost.newTabSpec(""+tabs[i]+"tab").setIndicator(tabs[i]), FloorFragment.class, null);
         }
     }
 }
