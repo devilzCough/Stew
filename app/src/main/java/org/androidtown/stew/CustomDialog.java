@@ -32,6 +32,5 @@ public class CustomDialog extends Dialog {
         });
 
         dialog.show();
-
     }
 }
