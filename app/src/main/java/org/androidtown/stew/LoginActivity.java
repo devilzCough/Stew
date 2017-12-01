@@ -1,14 +1,11 @@
 package org.androidtown.stew;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         pw = editPW.getText().toString();
 
         if(id.equals("") || pw.equals("")){
-            Toast.makeText(this,"Input!!",Toast.LENGTH_LONG).show();
+            CustomDialog alert = new CustomDialog(this,"학번과 비밀번호를 입력하세요");
         }
         else{
             webView.web_login(id,pw);
@@ -75,17 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(menuIntent);
         }
         else if(loginFlag == 0){
-
-            final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
-            alertDialog.setTitle("LOGIN");
-            alertDialog.setMessage("LOGIN FAIL!");
-            alertDialog.setIcon(R.drawable.notok);
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    alertDialog.dismiss();
-                }
-            });
-            alertDialog.show();
+            CustomDialog alert = new CustomDialog(this,"LOGIN FAIL");
         }
     }
 }

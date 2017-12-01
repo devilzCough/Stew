@@ -39,7 +39,5 @@
             android:layout_marginTop="50dp"
             android:text="This is Sejong University Study Room Reservation App"
             />
-
-        />
     </LinearLayout>
 </LinearLayout>

@@ -3,15 +3,19 @@
     <tabs>
         <tab
             id="@+id/tab_home"
+            icon="@drawable/home"
             title="홈"/>
         <tab
             id="@+id/tab_status"
+            icon="@drawable/list"
             title="전체현황"/>
         <tab
             id="@+id/tab_reserve"
+            icon="@drawable/book"
             title="예약하기"/>
         <tab
             id="@+id/tab_mylist"
+            icon="@drawable/man"
             title="나의현황"/>
     </tabs>
 </PreferenceScreen>

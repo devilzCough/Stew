@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.androidtown.stew.MenuActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="12">
 
     <android.support.design.widget.AppBarLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -18,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#E19674"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@android:color/white"/>
     </android.support.design.widget.AppBarLayout>
 
 
@@ -27,14 +30,16 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"/>
+        android:layout_weight="9.9"/>
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
+        android:layout_margin="0dp"
         app:bb_tabXmlResource="@xml/bottombar_tabs"
+        android:background="@color/stewColor"
         />
 
 </LinearLayout>
