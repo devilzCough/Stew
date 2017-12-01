@@ -10,12 +10,12 @@ import android.view.ViewGroup;
  * Created by limjeonghyun on 2017. 11. 30..
  */
 
-public class MenuFragment extends Fragment{
-    public MenuFragment(){
+public class HomeFragment extends Fragment{
+    public HomeFragment(){
 
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

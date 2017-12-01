@@ -24,9 +24,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
 
-    MenuFragment menuFragment;
-    ReservationFragment reservationFragment;
-    StatusFragment statusFragment;
+    HomeFragment homeFragment;
+    RoomOptionFragment roomOptionFragment;
+    RoomListFragment roomListFragment;
     MyListFragment myListFragment;
     FragmentManager fragmentManager;
 
@@ -50,9 +50,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        menuFragment = new MenuFragment();
+        homeFragment = new HomeFragment();
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.content,menuFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.content, homeFragment).commit();
 
         bottomBar = (BottomBar)findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -63,18 +63,18 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 int id = tabId;
                 if (id == R.id.tab_home) {
                     Log.d("msg","home");
-                    menuFragment = new MenuFragment();
-                    fragment = menuFragment;
+                    homeFragment = new HomeFragment();
+                    fragment = homeFragment;
                 }
                 else if (id == R.id.tab_reserve) {
                     Log.d("msg","reserve");
-                    reservationFragment = new ReservationFragment();
-                    fragment = reservationFragment;
+                    roomOptionFragment = new RoomOptionFragment();
+                    fragment = roomOptionFragment;
 
                 } else if (id == R.id.tab_status) {
                     Log.d("msg","status");
-                    statusFragment = new StatusFragment();
-                    fragment = statusFragment;
+                    roomListFragment = new RoomListFragment();
+                    fragment = roomListFragment;
 
                 } else if (id == R.id.tab_mylist) {
                     Log.d("msg","mylist");
@@ -124,13 +124,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.nav_reserve) {
             Log.d("msg","reserve");
-            reservationFragment = new ReservationFragment();
-            fragment = reservationFragment;
+            roomOptionFragment = new RoomOptionFragment();
+            fragment = roomOptionFragment;
 
         } else if (id == R.id.nav_status) {
             Log.d("msg","status");
-            statusFragment = new StatusFragment();
-            fragment = statusFragment;
+            roomListFragment = new RoomListFragment();
+            fragment = roomListFragment;
 
         } else if (id == R.id.nav_mylist) {
             Log.d("msg","mylist");
@@ -139,8 +139,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
             Log.d("msg","logout");
-            menuFragment = new MenuFragment();
-            fragment = menuFragment;
+            homeFragment = new HomeFragment();
+            fragment = homeFragment;
 
         }
 
