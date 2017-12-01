@@ -23,6 +23,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
+    private BottomBar bottomBar;
+
 
     HomeFragment homeFragment;
     RoomOptionFragment roomOptionFragment;
@@ -30,7 +32,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     MyListFragment myListFragment;
     FragmentManager fragmentManager;
 
-    BottomBar bottomBar;
+
 
 
     @Override
@@ -40,6 +42,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -88,6 +91,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logout, menu);

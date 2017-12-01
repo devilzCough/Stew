@@ -24,13 +24,13 @@
             app:titleTextColor="@android:color/white"/>
     </android.support.design.widget.AppBarLayout>
 
-
     <FrameLayout
         android:id="@+id/content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9.9"/>
+        android:layout_weight="9.9">
+    </FrameLayout>
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
