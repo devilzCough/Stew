@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,10 +42,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         /*Drawable drawable=context.getResources().getDrawable(item.getImage());
         holder.image.setBackground(drawable);*/
         holder.bookInfo.setText(item.getBookInfo());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.detailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Toast.makeText(context,item.getBookInfo(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // send remove request
+                // and draw again..
+                Toast.makeText(context, "remove!!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -56,13 +66,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         // ImageView image;
         TextView bookInfo;
+        ImageButton detailBtn, cancelBtn;
+
         CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             // image = (ImageView)itemView.findViewById(R.id.image);
-            bookInfo = (TextView)itemView.findViewById(R.id.bookInfo);
-            cardView = (CardView)itemView.findViewById(R.id.cardView);
+            bookInfo = (TextView) itemView.findViewById(R.id.bookInfo);
+            detailBtn = (ImageButton) itemView.findViewById(R.id.btnDetail);
+            cancelBtn = (ImageButton) itemView.findViewById(R.id.btnCancel);
+
+            // cardView = (CardView)itemView.findViewById(R.id.cardView);
         }
     }
 }

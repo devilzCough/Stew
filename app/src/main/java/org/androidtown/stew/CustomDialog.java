@@ -13,24 +13,36 @@ import android.widget.TextView;
 
 public class CustomDialog extends Dialog {
 
-    public CustomDialog(Context context, String msg){
+    public CustomDialog(Context context, int typeNum, String msg) {
+
         super(context);
         final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.dialog);
 
-        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
-        text.setText(msg);
+        if (typeNum == StewConstant.WARNING_DIALOG) {
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.dialog);
 
+            TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
+            text.setText(msg);
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+        } else if (typeNum == StewConstant.SELECT_DIALOG) {
+            // ...
+        }
         dialog.show();
+    }
+
+    public CustomDialog(Context context, int typeNum, BookInfo info) {
+
+        super(context);
+        final Dialog dialog = new Dialog(context);
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="300dp"
+    android:gravity="center_horizontal"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/stewColor"
+        android:text="예약 정보"
+        android:gravity="center_horizontal"
+        android:padding="10dp"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_gravity="fill"
+                android:text="일시 : "
+                android:layout_columnWeight="1" />
+
+            <TextView
+                android:id="@+id/lblDate"
+                android:layout_gravity="fill"
+                android:text=""
+                android:layout_columnWeight="2"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_gravity="fill"
+                android:text="위치 : "
+                android:layout_columnWeight="1" />
+
+            <TextView
+                android:id="@+id/lblRoom"
+                android:layout_gravity="fill"
+                android:text=""
+                android:layout_columnWeight="2"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="5dp"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_gravity="fill"
+                android:text="사용자 : "
+                android:layout_columnWeight="1" />
+
+            <TextView
+                android:id="@+id/lblUser"
+                android:layout_gravity="fill"
+                android:text=""
+                android:maxLines="10"
+                android:layout_columnWeight="2"
+                />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"/>
+
+</LinearLayout>

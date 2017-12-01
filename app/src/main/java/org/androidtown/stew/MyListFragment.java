@@ -18,7 +18,9 @@ import java.util.List;
 public class MyListFragment extends Fragment{
 
     // test info
-    String[] bookInfo = {"2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸"};
+    int nInfo;
+    String[] bookInfo = {"2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸", "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸"
+    , "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸", "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸"};
 
     // ArrayList<CardView> bookList;
 
@@ -34,13 +36,18 @@ public class MyListFragment extends Fragment{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
+        nInfo = bookInfo.length;
         List<CustomBookCard> items=new ArrayList<>();
-        CustomBookCard[] item=new CustomBookCard[2];
-        item[0]=new CustomBookCard(bookInfo[0]);
-        item[1]=new CustomBookCard(bookInfo[1]);
+        CustomBookCard[] item=new CustomBookCard[nInfo];
+        for (int i = 0; i < nInfo; i++) {
+            item[i] = new CustomBookCard(bookInfo[i]);
+            items.add(item[i]);
+        }
+        /*item[0]=new CustomBookCard(bookInfo[0]);
+        item[1]=new CustomBookCard(bookInfo[1]);*/
 
 
-        for (int i=0;i<2;i++) items.add(item[i]);
+        /*for (int i=0;i<2;i++) items.add(item[i]);*/
 
         recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(),items,R.id.myListView));
 
