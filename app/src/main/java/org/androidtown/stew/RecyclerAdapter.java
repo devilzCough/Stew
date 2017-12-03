@@ -1,17 +1,17 @@
 package org.androidtown.stew;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     List<CustomBookCard> items;
     int item_layout;
 
-    public RecyclerAdapter(Context context, List<CustomBookCard> items, int item_layout) {
+    public RecyclerAdapter(Context context, ArrayList<CustomBookCard> items, int item_layout) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;
@@ -35,35 +35,39 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return new ViewHolder(v);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final CustomBookCard item = items.get(position);
-        /*Drawable drawable=context.getResources().getDrawable(item.getImage());
-        holder.image.setBackground(drawable);*/
-        holder.bookInfo.setText(item.getBookInfo());
-        holder.detailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                // test code : insert information
-                BookInfo info = new BookInfo();
-                info.setStrDate("2017/12/05");
-                info.setStrTime("10:00 부터 1시간");
-                info.setStrRoom("02 스터디룸(7층)");
-                info.setStrUsers("이승진 14010969");
+        holder.bookInfoRoom.setText(item.getBookInfoRoom());
+        holder.bookInfoDate.setText(item.getBookInfoDate());
+        holder.bookInfoTime.setText(item.getBookInfoTime());
+        holder.bookInfoUser.setText(item.getBookInfoUser());
 
-                CustomDialog alert = new CustomDialog(context, StewConstant.INFO_DIALOG, info);
-            }
-        });
 
         holder.cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // send remove request
-                // and draw again..
                 Toast.makeText(context, "remove!!!", Toast.LENGTH_SHORT).show();
             }
+        });
+        holder.moreBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                int flag = item.getBtnMoreFlag();
+                if(flag == 0) {
+                    holder.bookInfoMore.setVisibility(View.VISIBLE);
+                    holder.moreBtn.setImageResource(R.drawable.close);
+                    item.setBtnMoreFlag(1);
+                }
+                else if(flag == 1) {
+                    holder.bookInfoMore.setVisibility(View.GONE);
+                    holder.moreBtn.setImageResource(R.drawable.more);
+                    item.setBtnMoreFlag(0);
+                }
+            }
+
+
         });
     }
 
@@ -72,20 +76,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return this.items.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // ImageView image;
-        TextView bookInfo;
-        ImageButton detailBtn, cancelBtn;
+
+        TextView bookInfoRoom;
+        TextView bookInfoDate;
+        TextView bookInfoTime;
+        TextView bookInfoUser;
+        TableRow bookInfoMore;
+
+        ImageButton cancelBtn;
+        ImageButton moreBtn;
 
         CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            // image = (ImageView)itemView.findViewById(R.id.image);
-            bookInfo = (TextView) itemView.findViewById(R.id.bookInfo);
-            detailBtn = (ImageButton) itemView.findViewById(R.id.btnDetail);
-            cancelBtn = (ImageButton) itemView.findViewById(R.id.btnCancel);
+            bookInfoRoom = (TextView)itemView.findViewById(R.id.bookInfo_room);
+            bookInfoDate = (TextView)itemView.findViewById(R.id.bookInfo_date);
+            bookInfoTime = (TextView)itemView.findViewById(R.id.bookInfo_time);
+            bookInfoUser = (TextView)itemView.findViewById(R.id.bookInfo_user);
 
-            // cardView = (CardView)itemView.findViewById(R.id.cardView);
+            cancelBtn = (ImageButton)itemView.findViewById(R.id.btnCancel);
+            moreBtn = (ImageButton)itemView.findViewById(R.id.btnMore);
+            bookInfoMore = (TableRow)itemView.findViewById(R.id.bookInfo_more);
         }
     }
 }

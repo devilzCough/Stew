@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by limjeonghyun on 2017. 11. 30..
@@ -17,12 +16,10 @@ import java.util.List;
 
 public class MyListFragment extends Fragment{
 
-    // test info
-    int nInfo;
-    String[] bookInfo = {"2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸", "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸"
-    , "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸", "2017. 12. 01 \n4층 19번 스터디룸", "2017. 12. 5 \n7층 3번 스터디룸"};
 
-    // ArrayList<CardView> bookList;
+    ArrayList<CustomBookCard> items;
+    String userID;
+    String userName;
 
     public MyListFragment(){
     }
@@ -35,30 +32,28 @@ public class MyListFragment extends Fragment{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-
-        nInfo = bookInfo.length;
-        List<CustomBookCard> items=new ArrayList<>();
-        CustomBookCard[] item = new CustomBookCard[nInfo];
-        for (int i = 0; i < nInfo; i++) {
-            item[i] = new CustomBookCard(bookInfo[i]);
-            items.add(item[i]);
-        }
-        /*item[0]=new CustomBookCard(bookInfo[0]);
-        item[1]=new CustomBookCard(bookInfo[1]);*/
-
-        /*for (int i=0;i<2;i++) items.add(item[i]);*/
-
+        items = new ArrayList<>();
+        createBookList();
         recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(),items,R.id.myListView));
 
-        /*bookList = new ArrayList<CardView>();
-        for (int i = 0; i < 2; i++) {
-            CardView tmpCard = (CardView) rootView.findViewById(R.id.cardView);
-            TextView text = (TextView) rootView.findViewById(R.id.bookInfo);
-            text.setText(bookInfo[i]);
-            bookList.add(tmpCard);
-        }*/
-
-
+        userID = AppManager.getInstance().getUserID();
+        userName = AppManager.getInstance().getUserName();
         return rootView;
+    }
+
+    public void createBookList(){
+
+        /* 추후 정보는 받아오는걸로 처리 */
+        int nInfo =2;
+        String[] bookInfoRoom = {"4층 Room 19","7층 Room 7"};
+        String[] bookInfoDate = {"2017-12-10","2017-12-12"};
+        String[] bookInfoTime = {"11:00-13:00","14:00-16:00"};
+        String[] bookInfoUser = {"14010960 이승진\n14010970 임정현","14010968 정해서\n14011002 이주연"};
+
+        CustomBookCard[] item = new CustomBookCard[nInfo];
+        for (int i = 0; i < nInfo; i++) {
+            item[i] = new CustomBookCard(bookInfoRoom[i],bookInfoDate[i],bookInfoTime[i],bookInfoUser[i]);
+            items.add(item[i]);
+        }
     }
 }

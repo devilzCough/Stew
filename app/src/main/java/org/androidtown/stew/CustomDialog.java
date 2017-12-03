@@ -22,7 +22,7 @@ public class CustomDialog extends Dialog {
 
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCancelable(false);
-            dialog.setContentView(R.layout.dialog);
+            dialog.setContentView(R.layout.dialog_warning);
 
             TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
             text.setText(msg);
@@ -39,6 +39,7 @@ public class CustomDialog extends Dialog {
         }
         dialog.show();
     }
+    /*
 
     public CustomDialog(Context context, int typeNum, BookInfo info) {
 
@@ -55,8 +56,8 @@ public class CustomDialog extends Dialog {
         TextView textRoom = (TextView) dialog.findViewById(R.id.lblRoom);
         textRoom.setText(info.getStrRoom());
 
-        /*TextView textUser = (TextView) dialog.findViewById(R.id.lblUser);
-        textDate.setText(info.getStrRoom());*/
+        TextView textUser = (TextView) dialog.findViewById(R.id.lblUser);
+        textDate.setText(info.getStrRoom());
 
 
         Button dialogButton = (Button) dialog.findViewById(R.id.btnClose);
@@ -70,4 +71,5 @@ public class CustomDialog extends Dialog {
         dialog.show();
 
     }
+    */
 }
