@@ -10,9 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -21,17 +20,17 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private TextView toolbarTitle;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private BottomBar bottomBar;
 
 
-    HomeFragment homeFragment;
+    InfoFragment infoFragment;
     RoomOptionFragment roomOptionFragment;
     RoomListFragment roomListFragment;
     MyListFragment myListFragment;
     FragmentManager fragmentManager;
-
 
 
 
@@ -42,7 +41,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
 
+        toolbarTitle = (TextView)toolbar.findViewById(R.id.toolbar_title);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -53,9 +54,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        homeFragment = new HomeFragment();
+        infoFragment = new InfoFragment();
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.content, homeFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.content, infoFragment).commit();
 
         bottomBar = (BottomBar)findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -64,25 +65,28 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 Fragment fragment = null;
 
                 int id = tabId;
-                if (id == R.id.tab_home) {
-                    Log.d("msg","home");
-                    homeFragment = new HomeFragment();
-                    fragment = homeFragment;
-                }
-                else if (id == R.id.tab_reserve) {
+                if (id == R.id.tab_reserve) {
                     Log.d("msg","reserve");
                     roomOptionFragment = new RoomOptionFragment();
                     fragment = roomOptionFragment;
-
-                } else if (id == R.id.tab_status) {
+                    toolbarTitle.setText("예약하기");
+                }
+                else if (id == R.id.tab_status) {
                     Log.d("msg","status");
                     roomListFragment = new RoomListFragment();
                     fragment = roomListFragment;
-
-                } else if (id == R.id.tab_mylist) {
+                    toolbarTitle.setText("전체현황");
+                }
+                else if (id == R.id.tab_info) {
+                    Log.d("msg","info");
+                    infoFragment = new InfoFragment();
+                    fragment = infoFragment;
+                    toolbarTitle.setText("이용안내");
+                }else if (id == R.id.tab_mylist) {
                     Log.d("msg","mylist");
                     myListFragment = new MyListFragment();
                     fragment = myListFragment;
+                    toolbarTitle.setText("마이페이지");
 
                 }
 
@@ -92,22 +96,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logout, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.menu_logout) {
-            Toast.makeText(this, "logout Clicked", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
@@ -143,8 +131,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
             Log.d("msg","logout");
-            homeFragment = new HomeFragment();
-            fragment = homeFragment;
+            infoFragment = new InfoFragment();
+            fragment = infoFragment;
 
         }
 
