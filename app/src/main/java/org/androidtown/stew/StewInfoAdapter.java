@@ -1,6 +1,8 @@
 package org.androidtown.stew;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,10 @@ import java.util.HashMap;
 public class StewInfoAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private ArrayList<String> titleList = null;
+    private ArrayList<String> titleList;
     private HashMap<String, ArrayList<String>> contentsList;
 
-    // private ViewHolder viewHolder = null;
+    private ViewHolder viewHolder;
 
     public StewInfoAdapter(Context c, ArrayList<String> titleList,
                            HashMap<String, ArrayList<String>> contentsList) {
@@ -60,6 +62,7 @@ public class StewInfoAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
@@ -71,27 +74,33 @@ public class StewInfoAdapter extends BaseExpandableListAdapter {
             //
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = (GridLayout) inflater.inflate(R.layout.info_title, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.infoTitle = (GridLayout) v.findViewById(R.id.infoTitle);
+            viewHolder.title = (TextView) v.findViewById(R.id.txtTitle);
+            v.setTag(viewHolder);
             //
             /*viewHolder = new ViewHolder();
             v = inflater.inflate(R.layout.info_title, parent, false);
             viewHolder.title = (TextView) v.findViewById(R.id.txtTitle);
             // viewHolder.iv_image = (ImageView) v.findViewById(R.id.iv_image);
             v.setTag(viewHolder);*/
-        }/*else{
-            viewHolder = (ViewHolder) v.getTag();
-        }*/
-
-        TextView textGroup = (TextView) v.findViewById(R.id.txtTitle);
-        textGroup.setText(groupName);
-
-        // 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
-        /*if (isExpanded) {
-            viewHolder.iv_image.setBackgroundColor(Color.GREEN);
         } else {
-            viewHolder.iv_image.setBackgroundColor(Color.WHITE);
+            viewHolder = (ViewHolder) v.getTag();
         }
 
-        viewHolder.title.setText(getGroup(groupPosition));*/
+        //TextView textGroup = (TextView) v.findViewById(R.id.txtTitle);
+        //textGroup.setText(groupName);
+
+        if (isExpanded) {
+            viewHolder.infoTitle.setBackgroundColor(R.color.stewColor);
+            viewHolder.title.setTextColor(Color.WHITE);
+        } else {
+            viewHolder.infoTitle.setBackgroundColor(Color.WHITE);
+            viewHolder.title.setTextColor(Color.GRAY);
+        }
+
+        viewHolder.title.setText(getGroup(groupPosition));
 
         return v;
     }
@@ -134,6 +143,8 @@ public class StewInfoAdapter extends BaseExpandableListAdapter {
     class ViewHolder {
 
         public ImageView iv_image;
+
+        public GridLayout infoTitle;
         public TextView title;
         public TextView contents;
     }
