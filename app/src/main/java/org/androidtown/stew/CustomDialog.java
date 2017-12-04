@@ -39,6 +39,7 @@ public class CustomDialog extends Dialog {
         }
         dialog.show();
     }
+}
     /*
 
     public CustomDialog(Context context, int typeNum, BookInfo info) {
@@ -70,4 +71,4 @@ public class CustomDialog extends Dialog {
 
         dialog.show();
     }
-}
+    */

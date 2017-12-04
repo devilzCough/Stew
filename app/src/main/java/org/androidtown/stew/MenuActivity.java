@@ -32,7 +32,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     RoomListFragment roomListFragment;
     MyListFragment myListFragment;
     FragmentManager fragmentManager;
-
+    JsoupProcess jsoupProcess;
 
 
     @Override
@@ -43,10 +43,15 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         Intent recievedIntent = getIntent();
         userID = recievedIntent.getStringExtra("user_id");
         userPW = recievedIntent.getStringExtra("user_pw");
-        AppManager.getInstance().setUserID(userID);
-        AppManager.getInstance().setUserID(userPW);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        jsoupProcess = new JsoupProcess();
+        AppManager.getInstance().setJsoupProcess(jsoupProcess);
+        jsoupProcess.userInfo();
+
+        AppManager.getInstance().setUserID(userID);
+        AppManager.getInstance().setUserPW(userPW);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
 
