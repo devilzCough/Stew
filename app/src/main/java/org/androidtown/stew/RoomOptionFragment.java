@@ -18,8 +18,8 @@ import java.util.Date;
 public class RoomOptionFragment extends Fragment {
 
     final String[] strDate = new String[7];
-    final String[] strHour = {"1시간", "2시간"};
-    final String[] strTimeBound = {};
+    final String[] strHour = {"1시간", "2시간", "3시간", "4시간"};
+    final String[] strStartTime = new String[24];
 
 
     Spinner dateSpin, hourSpin, timeSpin;
@@ -49,20 +49,24 @@ public class RoomOptionFragment extends Fragment {
             strDate[i] = "" + dateFormat.format(date);
         }
         dateSpin = rootView.findViewById(R.id.spinDate);
-        ArrayAdapter dateAdapter = new ArrayAdapter( getActivity().getApplicationContext(), R.layout.spin, strDate );
-        dateAdapter.setDropDownViewResource(
-                R.layout.spin_dropdown);
+        ArrayAdapter dateAdapter = new ArrayAdapter( getActivity().getApplicationContext(), R.layout.spin, strDate);
+        dateAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         dateSpin.setAdapter(dateAdapter);
 
         // Hour Spinner
         hourSpin = rootView.findViewById(R.id.spinHour);
         ArrayAdapter hourAdapter = new ArrayAdapter( getActivity().getApplicationContext(), R.layout.spin, strHour);
-        hourAdapter.setDropDownViewResource(
-                R.layout.spin_dropdown);
+        hourAdapter.setDropDownViewResource(R.layout.spin_dropdown);
         hourSpin.setAdapter(hourAdapter);
 
         // Time Spinner
+        for (int i = 0; i < 24; i++)
+            strStartTime[i] = i + "시";
 
+        timeSpin = rootView.findViewById(R.id.spinTime);
+        ArrayAdapter timeAdapter = new ArrayAdapter( getActivity().getApplicationContext(), R.layout.spin, strStartTime);
+        timeAdapter.setDropDownViewResource(R.layout.spin_dropdown);
+        timeSpin.setAdapter(timeAdapter);
 
         return rootView;
     }
