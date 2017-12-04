@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/infoTitle"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:columnCount="2">
 
     <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:src="@drawable/stew"/>
 
     <TextView
         android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="STEW 사용법"
-        android:textSize="23dp"
+        android:layout_gravity="fill"
+        android:text=""
+        android:textSize="23sp"
         android:gravity="center_vertical"
         android:padding="10dp"
-        android:layout_columnWeight="2"/>
+        />
 
 </GridLayout>
