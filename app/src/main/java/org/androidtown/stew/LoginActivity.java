@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         pw = editPW.getText().toString();
 
         if(id.equals("") || pw.equals("")){
-            CustomDialog alert = new CustomDialog(this, StewConstant.WARNING_DIALOG, "학번과 비밀번호를 입력하세요");
+            CustomDialog alert = new CustomDialog(this,"학번과 비밀번호를 입력하세요");
         }
         else{
             webView.web_login(id,pw);
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(menuIntent);
         }
         else if(loginFlag == 0){
-            CustomDialog alert = new CustomDialog(this, StewConstant.WARNING_DIALOG, "LOGIN FAIL");
+            CustomDialog alert = new CustomDialog(this,"LOGIN FAIL");
         }
     }
 }
