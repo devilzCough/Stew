@@ -1,5 +1,6 @@
 package org.androidtown.stew;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private BottomBar bottomBar;
-
+    private String userID,userPW;
 
     InfoFragment infoFragment;
     RoomOptionFragment roomOptionFragment;
@@ -38,6 +39,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Intent recievedIntent = getIntent();
+        userID = recievedIntent.getStringExtra("user_id");
+        userPW = recievedIntent.getStringExtra("user_pw");
+        AppManager.getInstance().setUserID(userID);
+        AppManager.getInstance().setUserID(userPW);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

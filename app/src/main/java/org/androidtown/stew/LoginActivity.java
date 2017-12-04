@@ -69,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if(loginFlag == 1){
             Intent menuIntent = new Intent(getApplicationContext(),MenuActivity.class);
+            menuIntent.putExtra("user_id",id);
+            menuIntent.putExtra("user_pw",pw);
             startActivity(menuIntent);
         }
         else if(loginFlag == 0){

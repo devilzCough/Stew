@@ -7,19 +7,41 @@ package org.androidtown.stew;
 
 public class CustomBookCard {
 
-    String bookInfo;
+    String bookInfoRoom;
+    String bookInfoDate;
+    String bookInfoTime;
+    String bookInfoUser;
+    int btnMoreFlag;
 
-    public CustomBookCard (String info) {
+    public CustomBookCard (String room,String date,String time,String user) {
 
-        bookInfo = info;
-        /*cardView.setCardBackgroundColor(new Color(211, 211, 211));
-        cardView.setRadius(20);
-        cardView.setCo;
-        */
+        bookInfoRoom = room;
+        bookInfoDate = date;
+        bookInfoTime = time;
+        bookInfoUser = user;
+        btnMoreFlag = 0;
+    }
+    
+
+    public String getBookInfoDate() {
+        return bookInfoDate;
     }
 
-    String getBookInfo() {
-        return bookInfo;
+    public String getBookInfoRoom() {
+        return bookInfoRoom;
     }
 
+    public String getBookInfoTime() {
+        return bookInfoTime;
+    }
+
+    public String getBookInfoUser() {
+        return bookInfoUser;
+    }
+    public int getBtnMoreFlag(){
+        return btnMoreFlag;
+    }
+    public void setBtnMoreFlag(int flag){
+        btnMoreFlag = flag;
+    }
 }
