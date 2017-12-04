@@ -5,10 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:background="@color/stewColor">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ExpandableListView
+        android:id="@+id/elv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:groupIndicator="@null" />
+
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -39,5 +45,5 @@
             android:layout_marginTop="50dp"
             android:text="This is Sejong University Study Room Reservation App"
             />
-    </LinearLayout>
+    </LinearLayout>-->
 </LinearLayout>
