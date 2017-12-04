@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="stewColor">#E19674</color>
+    <color name="stewColor">#eab196</color>
+    <color name="stewColor_light">#eab196</color>
 
 </resources>

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -14,46 +15,83 @@ import java.util.ArrayList;
  * Created by limjeonghyun on 2017. 11. 30..
  */
 
-public class MyListFragment extends Fragment{
+public class MyListFragment extends Fragment {
 
 
     ArrayList<CustomBookCard> items;
     String userID;
     String userName;
+    TextView txtID, txtName;
+    JsoupProcess jsoupProcess;
 
-    public MyListFragment(){
+    ArrayList<String> bookListString;
+
+    public MyListFragment() {
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mylist, container, false);
 
-        RecyclerView recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerView);
+        txtID = (TextView) rootView.findViewById(R.id.txtID);
+        txtName = (TextView) rootView.findViewById(R.id.txtName);
+
+        jsoupProcess = AppManager.getInstance().getJsoupProcess();
+        jsoupProcess.mylistInfo();
+
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         items = new ArrayList<>();
-        createBookList();
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(),items,R.id.myListView));
+
+        while (!jsoupProcess.getEndFlag()) {
+        }
+
+        bookListString = jsoupProcess.getListString();
+        createBookList(bookListString);
+
+        recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
 
         userID = AppManager.getInstance().getUserID();
         userName = AppManager.getInstance().getUserName();
+        txtID.setText(userID);
+        txtName.setText(userName);
         return rootView;
     }
 
-    public void createBookList(){
+    public void createBookList(ArrayList<String> bookList) {
 
         /* 추후 정보는 받아오는걸로 처리 */
-        int nInfo =2;
-        String[] bookInfoRoom = {"4층 Room 19","7층 Room 7"};
-        String[] bookInfoDate = {"2017-12-10","2017-12-12"};
-        String[] bookInfoTime = {"11:00-13:00","14:00-16:00"};
-        String[] bookInfoUser = {"14010960 이승진\n14010970 임정현","14010968 정해서\n14011002 이주연"};
+        int nInfo = bookList.size();
+
+        ArrayList<String> bookInfoRoom = new ArrayList<String>();
+        ArrayList<String> bookInfoDate = new ArrayList<String>();
+        ArrayList<String> bookInfoTime = new ArrayList<String>();
+        ArrayList<String> bookInfoUser = new ArrayList<String>();
+
+        for(String list : bookList){
+            String[] infoArray = list.split("/");
+            bookInfoRoom.add(infoArray[0]);
+
+            String[] timeDivideArray = infoArray[1].split(" ");
+            bookInfoDate.add(timeDivideArray[0]);
+            bookInfoTime.add(timeDivideArray[1]+" "+timeDivideArray[3]);
+
+            String[] userDivideArray = infoArray[2].split(" ");
+            String userString="";
+            for(int i=0;i<userDivideArray.length/8;i++){
+                userString += userDivideArray[(8*i)+7] +"\t"+ userDivideArray[(8*i)+3]+"\n";
+            }
+            bookInfoUser.add(userString);
+        }
 
         CustomBookCard[] item = new CustomBookCard[nInfo];
         for (int i = 0; i < nInfo; i++) {
-            item[i] = new CustomBookCard(bookInfoRoom[i],bookInfoDate[i],bookInfoTime[i],bookInfoUser[i]);
+            item[i] = new CustomBookCard(bookInfoRoom.get(i), bookInfoDate.get(i), bookInfoTime.get(i), bookInfoUser.get(i));
             items.add(item[i]);
         }
     }
+
 }

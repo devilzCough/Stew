@@ -3,6 +3,7 @@ package org.androidtown.stew;
 import android.content.Context;
 import android.net.http.SslError;
 import android.util.Log;
+import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -20,6 +21,7 @@ public class BackgroundWebview extends WebView {
 
     String userID,userPW;
     int loadCheck ,loginFlag;
+    String currentURL,cookies;
 
     public BackgroundWebview(Context context) {
         super(context);
@@ -62,8 +64,13 @@ public class BackgroundWebview extends WebView {
                 loadCheck++;
             }
             if(url.equals(url_study) && loginFlag != 1) {
-                loginFlag = 1;
                 Log.d(TAG,"login success "+loadCheck);
+                currentURL = getUrl();
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookies = cookieManager.getCookie(currentURL);
+                AppManager.getInstance().setCookies(cookies);
+                Log.d(TAG,"cookies : "+cookies);
+                loginFlag = 1;
             }
             else if(url.equals(url_login) && loadCheck > 2){
                 loginFlag = 0;

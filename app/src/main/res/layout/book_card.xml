@@ -3,7 +3,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardView"
-    android:layout_width="400dp"
+    android:layout_width="350dp"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="@dimen/cardview_default_elevation"
@@ -16,15 +16,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/stewColor"
-            android:padding="10dp">
+            android:background="@color/stewColor_light"
+            android:padding="7dp">
 
             <TextView
                 android:id="@+id/bookInfo_room"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_span="2"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold"/>
 
             <ImageButton
@@ -39,7 +39,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp">
+            android:padding="6dp">
 
             <TextView
                 android:id="@+id/textView"
@@ -58,7 +58,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp">
+            android:padding="6dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="6dp"
             android:visibility="gone"
             android:id="@+id/bookInfo_more">
 
