@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".JsoupActivity" />
-        <activity android:name=".MenuActivity"/>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".ReservationActivity" />
+        <activity android:name=".RoomInformationActivity"></activity>
     </application>
 
 </manifest>
