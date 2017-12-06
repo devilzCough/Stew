@@ -134,9 +134,9 @@ public class BackgroundWebview extends WebView {
                 String script = "javascript:function afterLoad() {"
                         + "document.getElementById('altPid').value = '" + studentId + "';"
                         + "document.getElementById('name').value = '" + studentName + "';"
-                        + "document.getElementById('year').value = '2017';"
-                        + "document.getElementById('month').value = '12';"
-                        + "document.getElementById('day').value = '09';"
+                        + "document.getElementById('year').value = 2017;"
+                        + "document.getElementById('month').value = 12;"
+                        + "document.getElementById('day').value = 09;"
                         + "studyroom.goStudyRoomUserInfo(" + userNum + ",'Y')"
                         + "};"
                         + "afterLoad();";

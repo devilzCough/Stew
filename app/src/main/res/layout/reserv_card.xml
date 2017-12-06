@@ -68,7 +68,8 @@
                 android:ems="10"
                 android:inputType="number"
                 android:background="@drawable/reserv_edit"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/studentName"
@@ -77,7 +78,8 @@
                 android:inputType="textPersonName"
                 android:text=""
                 android:background="@drawable/reserv_edit"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:paddingLeft="5dp"/>
         </GridLayout>
 
     </LinearLayout>

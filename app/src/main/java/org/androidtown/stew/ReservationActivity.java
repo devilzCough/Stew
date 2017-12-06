@@ -21,12 +21,14 @@ public class ReservationActivity extends AppCompatActivity {
     Button btnResv;
 
     int nCount;
+    ReservationInfo info;
 
     RecyclerView recyclerView;
     BackgroundWebview webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
 

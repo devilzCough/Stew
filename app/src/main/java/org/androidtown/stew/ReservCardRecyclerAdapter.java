@@ -42,12 +42,18 @@ public class ReservCardRecyclerAdapter extends RecyclerView.Adapter<ReservCardRe
 
         final CustomReservCard item = items.get(position);
 
+        holder.tvUserNum.setText("사용자" + item.getUserNum());
         if (!item.getUserFlag()) {
             holder.etStudentId.setText(item.getStrStudentId());
             holder.etStudentName.setText(item.getStrStudentName());
+            holder.checkBtn.setText("삭제");
+        }
+        else {
+            holder.etStudentId.setText("");
+            holder.etStudentName.setText("");
+            holder.checkBtn.setText("조회");
         }
 
-        holder.tvUserNum.setText("사용자" + item.getUserNum());
         holder.checkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,26 +66,32 @@ public class ReservCardRecyclerAdapter extends RecyclerView.Adapter<ReservCardRe
                     String id = holder.etStudentId.getText().toString();
                     String name = holder.etStudentName.getText().toString();
 
+                    // webView .....
                     webView = new BackgroundWebview(context);
                     AppManager.getInstance().setWebView(webView);
 
                     webView.userCheck(item.getUserNum(), id, name);
-                    /* alert when wrong input */
+                        /* alert when wrong input */
+                    //
 
                     item.setUserFlag(false);
+                    item.setStrStudentId(id);
+                    item.setStrStudentName(name);
                     holder.checkBtn.setText("삭제");
 
-                // now button = 'delete'
+                    // now button = 'delete'
                 } else {
-
                     holder.etStudentId.setText("");
                     holder.etStudentName.setText("");
                     item.setUserFlag(true);
+                    item.setStrStudentId("");
+                    item.setStrStudentName("");
                     holder.checkBtn.setText("조회");
                 }
 
             }
         });
+
     }
 
     @Override

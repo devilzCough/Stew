@@ -10,6 +10,7 @@ public class CustomReservCard {
     int userNum;
     String strStudentId;
     String strStudentName;
+    String strPid;
 
     boolean userFlag;
 
@@ -29,6 +30,7 @@ public class CustomReservCard {
     public String getStrStudentName() {
         return strStudentName;
     }
+    public String getStrPid() { return strPid; }
     public boolean getUserFlag() { return userFlag; }
 
     public void setStrStudentId(String id){
@@ -37,5 +39,6 @@ public class CustomReservCard {
     public void setStrStudentName(String name){
         strStudentName = name;
     }
+    public void setStrPid(String pid) { strPid = pid; }
     public void setUserFlag(boolean flag) { userFlag = flag; }
 }
