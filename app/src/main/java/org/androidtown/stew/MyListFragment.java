@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class MyListFragment extends Fragment {
 
-
     ArrayList<CustomBookCard> items;
     String userID;
     String userName;
@@ -52,7 +51,7 @@ public class MyListFragment extends Fragment {
         bookListString = jsoupProcess.getListString();
         createBookList(bookListString);
 
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
+        recyclerView.setAdapter(new BookCardRecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
 
         userID = AppManager.getInstance().getUserID();
         userName = AppManager.getInstance().getUserName();
