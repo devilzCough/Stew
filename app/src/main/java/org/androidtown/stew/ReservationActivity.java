@@ -39,8 +39,16 @@ public class ReservationActivity extends AppCompatActivity {
 
         /* set room, date, time info */
         // test code
+        info = new ReservationInfo(11);
+        info.setYear(2017);
+        info.setMonth(12);
+        info.setDay(14);
+        info.setStartHour(10);
+        info.setHours(1);
+        info.setPurpose("dd");
+
         txtRoom.setText("4층 19번 스터디룸");
-        txtDate.setText("2017. 12. 07 15:00 ~ 16:00");
+        txtDate.setText("2017. 12. 14 10:00 ~ 11:00");
 
         recyclerView = (RecyclerView) findViewById(R.id.resvRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -73,16 +81,17 @@ public class ReservationActivity extends AppCompatActivity {
 
     public void onReservBtnClicked(View v) {
 
+        CustomDialog alert = new CustomDialog(this,0,"스터디룸 예약이 완료되었습니다.");
         // test code
-        int year = 2017;
+        /*int year = 2017;
         int month = 12;
         int day = 7;
         int startHour = 10;
         int hours = 1;
-        String purpose = etPurpose.getText().toString();
+        String purpose = etPurpose.getText().toString();*/
 
         // minimum input num check?
-        webView.web_reservation(year, month, day, startHour, hours, purpose, items);
+        // webView.web_reservation(info, items);
     }
 
     public void onAddBtnClicked(View v) {

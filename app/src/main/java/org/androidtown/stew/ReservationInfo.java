@@ -6,12 +6,12 @@ package org.androidtown.stew;
 
 public class ReservationInfo {
 
-    int infoNum, roomId;
-    int year, month, day, startHour, hours;
-    String purpose;
+    private int roomId;
+    private int year, month, day, startHour, hours;
+    private String purpose;
 
-    public ReservationInfo(int num) {
-        infoNum = num;
+    public ReservationInfo(int id) {
+        roomId = id;
     }
 
     public int getYear() { return year; }
