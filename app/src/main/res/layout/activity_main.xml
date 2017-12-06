@@ -33,7 +33,7 @@
             android:textColor="@android:color/white"
             android:textColorHint="#80FFFFFF"
             android:layout_marginBottom="15dp"
-            android:text="14010970"/>
+            android:text="14010969"/>
         <EditText
             android:id="@+id/editPw"
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:textColor="@android:color/white"
             android:textColorHint="#80FFFFFF"
             android:padding="10dp"
-            android:text="2030621"/>
+            android:text=""/>
 
         <Button
         android:id="@+id/loginBtn"

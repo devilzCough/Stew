@@ -1,5 +1,6 @@
 package org.androidtown.stew;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -24,13 +25,15 @@ import java.util.Map;
  * Created by limjeonghyun on 2017. 11. 30..
  */
 
-public class FloorFragment extends Fragment{
+public class FloorFragment extends Fragment {
+
     int floorOrder;
     int nRoom[] = {13,11,6,4};
     int startNum[] = {1,14,25,1};
     int roomID;
     JsoupProcess jsoupProcess;
     TableLayout tableLayout;
+    Button goResvBtn;
     View view;
 
     Map<String,Integer> roomMap = new HashMap<String,Integer>();
@@ -49,6 +52,8 @@ public class FloorFragment extends Fragment{
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        int col=0;
+        int roomNum;
 
         view = inflater.inflate(R.layout.fragment_floor, container, false);
         if(getArguments() == null) return view;
@@ -56,6 +61,15 @@ public class FloorFragment extends Fragment{
         AppManager.getInstance().setFloorFragment(this);
         tableLayout = (TableLayout)view.findViewById(R.id.tableLayout);
         tableLayout.setVerticalScrollBarEnabled(true);
+
+        goResvBtn = (Button) view.findViewById(R.id.btnGoResv);
+        goResvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ReservationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final Spinner roomSpinner = (Spinner)view.findViewById(R.id.roomSpinner);
         jsoupProcess = AppManager.getInstance().getJsoupProcess();
@@ -174,9 +188,11 @@ public class FloorFragment extends Fragment{
             }
             tableLayout.addView(tableRow);
         }
-        System.out.println("TEST");
-        view.invalidate();
 
+        goResvBtn.setVisibility(View.VISIBLE);
+        System.out.println("TEST");
+
+        view.invalidate();
     }
 
     private void mapInit() {
@@ -220,6 +236,6 @@ public class FloorFragment extends Fragment{
         roomMap.put("진관홀 3",36);
 
         AppManager.getInstance().setRoomMap(roomMap);
-
     }
+
 }

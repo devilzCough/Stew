@@ -34,6 +34,17 @@
                 android:gravity="center">
             </TableLayout>
         </ScrollView>
+        <Button
+            android:id="@+id/btnGoResv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:textSize="15dp"
+            android:background="@drawable/color_button"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 

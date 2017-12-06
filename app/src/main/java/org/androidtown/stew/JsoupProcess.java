@@ -144,11 +144,12 @@ public class JsoupProcess {
 
                     htmlPageUrl = "http://library.sejong.ac.kr/studyRoom/UserFind.axa";
 
-                    String str = Jsoup.connect(htmlPageUrl)
+                     document = Jsoup.connect(htmlPageUrl)
                             .header("Cookie", cookies)
                             .header("Origin", "http://library.sejong.ac.kr")
                             .header("User-Agent", "Mozilla/5.0")
-                            .header("Refer", "http://library.sejong.ac.kr/studyroom/Request.ax?roomId=14")
+                            .header("Referer", "http://library.sejong.ac.kr/studyroom/Request.ax?roomId=14")
+                            .header("Content-type","application/x-www-json-urlencoded; charset=utf-8")
                             .data("altPid", userID)
                             .data("name",userName)
                             .data("userBlockUser","Y")
@@ -156,9 +157,9 @@ public class JsoupProcess {
                             .data("month","12")
                             .data("day","07")
                             .data("_","")
-                            .post().html();
+                            .post();
 
-                    System.out.println(str);
+                    System.out.println(document.text());
 
                 }
                 else if(mode == MODE_MYLIST){

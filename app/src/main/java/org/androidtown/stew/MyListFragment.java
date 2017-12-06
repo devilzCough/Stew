@@ -54,7 +54,6 @@ public class MyListFragment extends Fragment {
 
     public void createBookList(ArrayList<String> bookList) {
 
-
         /* 추후 정보는 받아오는걸로 처리 */
         int nInfo = bookList.size();
         items = new ArrayList<>();
@@ -85,7 +84,7 @@ public class MyListFragment extends Fragment {
             items.add(item[i]);
         }
 
-        recyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
+        recyclerView.setAdapter(new BookCardRecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
 
         rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
         userID = AppManager.getInstance().getUserID();
