@@ -24,27 +24,51 @@
             />
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
-            <TableLayout
-                android:id="@+id/tableLayout"
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:orientation="vertical"
                 android:gravity="center">
-            </TableLayout>
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+                </TableLayout>
+                <LinearLayout
+                    android:id="@+id/linearButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"
+                    >
+                    <Button
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/btnGoDetail"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="상세정보"
+                        android:textSize="15dp"
+                        android:background="@drawable/color_button"
+                        />
+                    <Button
+
+                        android:id="@+id/btnGoResv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="예약"
+                        android:textSize="15dp"
+                        android:background="@drawable/color_button"
+                        />
+                </LinearLayout>
+            </LinearLayout>
         </ScrollView>
-        <Button
-            android:id="@+id/btnGoResv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="예약"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:textSize="15dp"
-            android:background="@drawable/color_button"
-            android:visibility="gone"
-            />
 
     </LinearLayout>
 
