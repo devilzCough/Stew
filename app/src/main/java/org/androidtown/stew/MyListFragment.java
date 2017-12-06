@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class MyListFragment extends Fragment {
 
+
     ArrayList<CustomBookCard> items;
     String userID;
     String userName;
@@ -24,6 +25,8 @@ public class MyListFragment extends Fragment {
     JsoupProcess jsoupProcess;
 
     ArrayList<String> bookListString;
+    RecyclerView recyclerView;
+    ViewGroup rootView;
 
     public MyListFragment() {
     }
@@ -31,7 +34,8 @@ public class MyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mylist, container, false);
+        AppManager.getInstance().setMyListFragment(this);
+        rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mylist, container, false);
 
         txtID = (TextView) rootView.findViewById(R.id.txtID);
         txtName = (TextView) rootView.findViewById(R.id.txtName);
@@ -39,24 +43,12 @@ public class MyListFragment extends Fragment {
         jsoupProcess = AppManager.getInstance().getJsoupProcess();
         jsoupProcess.mylistInfo();
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        items = new ArrayList<>();
 
-        while (!jsoupProcess.getEndFlag()) {
-        }
 
-        bookListString = jsoupProcess.getListString();
-        createBookList(bookListString);
-
-        recyclerView.setAdapter(new BookCardRecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
-
-        userID = AppManager.getInstance().getUserID();
-        userName = AppManager.getInstance().getUserName();
-        txtID.setText(userID);
-        txtName.setText(userName);
         return rootView;
     }
 
@@ -64,7 +56,7 @@ public class MyListFragment extends Fragment {
 
         /* 추후 정보는 받아오는걸로 처리 */
         int nInfo = bookList.size();
-
+        items = new ArrayList<>();
         ArrayList<String> bookInfoRoom = new ArrayList<String>();
         ArrayList<String> bookInfoDate = new ArrayList<String>();
         ArrayList<String> bookInfoTime = new ArrayList<String>();
@@ -91,6 +83,14 @@ public class MyListFragment extends Fragment {
             item[i] = new CustomBookCard(bookInfoRoom.get(i), bookInfoDate.get(i), bookInfoTime.get(i), bookInfoUser.get(i));
             items.add(item[i]);
         }
+
+        recyclerView.setAdapter(new BookCardRecyclerAdapter(getActivity().getApplicationContext(), items, R.id.myListView));
+
+        rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+        userID = AppManager.getInstance().getUserID();
+        userName = AppManager.getInstance().getUserName();
+        txtID.setText(userID);
+        txtName.setText(userName);
     }
 
 }

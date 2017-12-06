@@ -35,7 +35,8 @@ public class RoomListFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_room_list, container, false);
 
-        viewPager = (ViewPager)view.findViewById(R.id.pager);
+//        viewPager = (ViewPager)view.findViewById(R.id.pager);
+
         tabHost = (FragmentTabHost)view.findViewById(android.R.id.tabhost);
         tabWidget = (TabWidget)view.findViewById(android.R.id.tabs);
         tabHost.setup(getActivity(), getChildFragmentManager(), R.id.realTabContent);
@@ -44,33 +45,33 @@ public class RoomListFragment extends Fragment {
         initializeTabs();
         setupTabHost();
 
-        pagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), tabs);
-        viewPager.setAdapter(pagerAdapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-
-                getActivity().invalidateOptionsMenu();
-                tabHost.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-                getActivity().invalidateOptionsMenu();
-            }
-        });
+//        pagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), tabs);
+//        viewPager.setAdapter(pagerAdapter);
+//
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//                getActivity().invalidateOptionsMenu();
+//                tabHost.setCurrentTab(position);
+//            }
+//
+//            @Override
+//            public void onPageScrolled(int arg0, float arg1, int arg2) {
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int arg0) {
+//                getActivity().invalidateOptionsMenu();
+//            }
+//        });
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                viewPager.setCurrentItem(tabHost.getCurrentTab());
-                scrollToCurrentTab();
+//                viewPager.setCurrentItem(tabHost.getCurrentTab());
+//                scrollToCurrentTab();
             }
         });
         return view;
@@ -102,9 +103,10 @@ public class RoomListFragment extends Fragment {
     }
 
     private void setupTabHost() {
-
-        for(int i=0; i<tabs.length; i++) {
-            tabHost.addTab(tabHost.newTabSpec(""+tabs[i]+"tab").setIndicator(tabs[i]), FloorFragment.class, null);
+        for (int i = 0 ; i < tabs.length ; i++) {
+            Bundle args = new Bundle();
+            args.putInt("floor_num", i);
+            tabHost.addTab(tabHost.newTabSpec(tabs[i]).setIndicator(tabs[i]), FloorFragment.class, args);
         }
     }
 }
