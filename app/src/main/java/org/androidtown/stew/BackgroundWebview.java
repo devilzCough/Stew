@@ -26,13 +26,11 @@ public class BackgroundWebview extends WebView {
     int loadCheck ,loginFlag;
     String currentURL,cookies;
 
-    int userNum;
-    String studentId, studentName;
+    int nUsers, roomID;
+    ReservationInfo info;
+    CustomReservCard user;
     boolean reservFlag;
 
-    int nUsers;
-    int year, month, day, startHour, hours;
-    String strPurpose;
     ArrayList<CustomReservCard> items;
 
     public BackgroundWebview(Context context) {
@@ -63,29 +61,22 @@ public class BackgroundWebview extends WebView {
     public void load_reservationPage(int roomId) {
 
         reservFlag = false;
+        roomID = roomId;
         url_reservation += roomId;
         loadUrl(url_reservation);
     }
 
-    public void userCheck(int num, String id, String name) {
+    public void userCheck(CustomReservCard item) {
 
-        userNum = num;
-        studentId = id;
-        studentName = name;
-        url_reservation += "11";
+        user = item;
+        url_reservation += roomID;
         loadUrl(url_reservation);
     }
 
-    public void web_reservation(int y, int m, int d, int sH, int h, String purpose, ArrayList<CustomReservCard> users) {
+    public void web_reservation(ReservationInfo item, ArrayList<CustomReservCard> users) {
 
         reservFlag = true;
-        year = y;
-        month = m;
-        day = d;
-        startHour = sH;
-        hours = h;
-        strPurpose = purpose;
-
+        info = item;
         items = users;
         nUsers = items.size();
     }
@@ -124,20 +115,20 @@ public class BackgroundWebview extends WebView {
             }
 
 
-            if (url.equals(url_reservation) && !reservFlag) {
-                /*String script = "javascript:function afterLoad() {"
-                        + "document.getElementById('altPid" + userNum + "').value = '" + studentId + "';"
-                        + "document.getElementById('name" + userNum + "').value = '" + studentName + "';"
-                        + "studyroom.goStudyRoomUserInfo(" + userNum + ",'Y')"
-                        + "};"
-                        + "afterLoad();";*/
+            /*else if (url.equals(url_reservation) && !reservFlag) {
+//                String script = "javascript:function afterLoad() {"
+//                        + "document.getElementById('altPid" + userNum + "').value = '" + studentId + "';"
+//                        + "document.getElementById('name" + userNum + "').value = '" + studentName + "';"
+//                        + "studyroom.goStudyRoomUserInfo(" + userNum + ",'Y')"
+//                        + "};"
+//                        + "afterLoad();";
                 String script = "javascript:function afterLoad() {"
-                        + "document.getElementById('altPid').value = '" + studentId + "';"
-                        + "document.getElementById('name').value = '" + studentName + "';"
+                        + "document.getElementById('altPid').value = '" + user.getStrStudentId() + "';"
+                        + "document.getElementById('name').value = '" + user.getStrStudentName() + "';"
                         + "document.getElementById('year').value = 2017;"
                         + "document.getElementById('month').value = 12;"
                         + "document.getElementById('day').value = 09;"
-                        + "studyroom.goStudyRoomUserInfo(" + userNum + ",'Y')"
+                        + "studyroom.goStudyRoomUserInfo(" + user.getUserNum() + ",'Y')"
                         + "};"
                         + "afterLoad();";
                 view.loadUrl(script);
@@ -158,13 +149,13 @@ public class BackgroundWebview extends WebView {
                     script += tmp;
                 }
 
-                String tmp = "document.getElementById('purpose').value = '" + strPurpose + "';"
+                String tmp = "document.getElementById('purpose').value = 'ddd';"
                         + "};"
                         + "afterLoad();";
 
                 script += tmp;
                 view.loadUrl(script);
-            }
+            }*/
         }
 
 

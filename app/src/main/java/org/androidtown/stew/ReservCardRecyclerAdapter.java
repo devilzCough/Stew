@@ -21,6 +21,7 @@ public class ReservCardRecyclerAdapter extends RecyclerView.Adapter<ReservCardRe
 
     Context context;
     List<CustomReservCard> items;
+    View v;
     int item_layout;
 
     public ReservCardRecyclerAdapter(Context context, ArrayList<CustomReservCard> items, int item_layout) {
@@ -33,7 +34,7 @@ public class ReservCardRecyclerAdapter extends RecyclerView.Adapter<ReservCardRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.reserv_card,null);
+        v= LayoutInflater.from(parent.getContext()).inflate(R.layout.reserv_card,null);
         return new ViewHolder(v);
     }
 
@@ -65,19 +66,25 @@ public class ReservCardRecyclerAdapter extends RecyclerView.Adapter<ReservCardRe
 
                     String id = holder.etStudentId.getText().toString();
                     String name = holder.etStudentName.getText().toString();
+                    if (id.equals("") || name.equals("")) {
+                        CustomDialog alert = new CustomDialog(v.getContext(),0,"학번과 이름을 입력해주세요.");
+                    } else {
+                        CustomDialog alert = new CustomDialog(v.getContext(),0,"사용자를 추가하였습니다.");
+
+                        item.setUserFlag(false);
+                        item.setStrStudentId(id);
+                        item.setStrStudentName(name);
+                        // webView.userCheck(item);
+                        holder.checkBtn.setText("삭제");
+                    }
 
                     // webView .....
-                    webView = new BackgroundWebview(context);
-                    AppManager.getInstance().setWebView(webView);
-
-                    webView.userCheck(item.getUserNum(), id, name);
+                    // webView = new BackgroundWebview(context);
+                    // AppManager.getInstance().setWebView(webView);
                         /* alert when wrong input */
                     //
 
-                    item.setUserFlag(false);
-                    item.setStrStudentId(id);
-                    item.setStrStudentName(name);
-                    holder.checkBtn.setText("삭제");
+
 
                     // now button = 'delete'
                 } else {

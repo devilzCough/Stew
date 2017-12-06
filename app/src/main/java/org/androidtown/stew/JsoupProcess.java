@@ -115,7 +115,6 @@ public class JsoupProcess {
                 Document document = Jsoup.connect(htmlPageUrl).header("cookie",cookies).get();
                 Elements elements= document.select(selectQuery);
 
-
                 if(mode == MODE_USER) {
                     userName = elements.get(0).text();
                     userID = elements.get(3).text();
