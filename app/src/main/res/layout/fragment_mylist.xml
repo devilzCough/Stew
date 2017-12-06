@@ -47,12 +47,20 @@
             android:padding="5dp"
             android:text="logout"
             android:background="@drawable/logout_button"/>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#cba19f9f"
         android:layout_marginBottom="20dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

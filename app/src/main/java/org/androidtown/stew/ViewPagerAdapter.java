@@ -10,18 +10,28 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
+    FragmentManager fragmentManager;
     String[] tabs;
 
     public ViewPagerAdapter(FragmentManager fm, String[] tabs) {
         super(fm);
+        fragmentManager = fm;
         this.tabs = tabs;
     }
     @Override
     public Fragment getItem(int i) {
-        return FloorFragment.newInstance(i);
+        System.out.println(i);
+
+        return FloorFragment.newInstance(1);
     }
+
     @Override
     public int getCount() {
         return tabs.length;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabs[position];
     }
 }
