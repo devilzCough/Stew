@@ -18,12 +18,12 @@ import java.util.List;
  * Created by iseungjin on 2017. 12. 1..
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class BookCardRecyclerAdapter extends RecyclerView.Adapter<BookCardRecyclerAdapter.ViewHolder> {
     Context context;
     List<CustomBookCard> items;
     int item_layout;
 
-    public RecyclerAdapter(Context context, ArrayList<CustomBookCard> items, int item_layout) {
+    public BookCardRecyclerAdapter(Context context, ArrayList<CustomBookCard> items, int item_layout) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;

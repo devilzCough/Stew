@@ -34,7 +34,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     JsoupProcess jsoupProcess;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         setTitle("");
 
         toolbarTitle = (TextView)toolbar.findViewById(R.id.toolbar_title);
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -99,15 +97,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                     myListFragment = new MyListFragment();
                     fragment = myListFragment;
                     toolbarTitle.setText("마이페이지");
-
                 }
 
                 fragmentManager.beginTransaction().replace(R.id.content,fragment).commit();
             }
         });
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -145,7 +140,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             Log.d("msg","logout");
             infoFragment = new InfoFragment();
             fragment = infoFragment;
-
         }
 
         fragmentManager.beginTransaction().replace(R.id.content,fragment).commit();
