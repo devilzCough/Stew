@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -27,14 +28,21 @@ import java.util.Map;
 
 public class FloorFragment extends Fragment {
 
-    int floorOrder;
+    int floorIndex;
+    String floorOrder[] = {"7층","4층","1층","세미나실"};
+
     int nRoom[] = {13,11,6,4};
     int startNum[] = {1,14,25,1};
     int roomID;
     JsoupProcess jsoupProcess;
     TableLayout tableLayout;
-    Button goResvBtn;
+    Button goResvBtn,goDetailBtn;
+    LinearLayout linearButtonLayout;
     View view;
+
+    String selectTime = "20시 1시간";
+    String selectDate = "2017-12-12" ;
+    String selectRoom;
 
     Map<String,Integer> roomMap = new HashMap<String,Integer>();
 
@@ -58,37 +66,56 @@ public class FloorFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_floor, container, false);
         if(getArguments() == null) return view;
 
+        final Spinner roomSpinner = (Spinner)view.findViewById(R.id.roomSpinner);
+        jsoupProcess = AppManager.getInstance().getJsoupProcess();
+
+        floorIndex = getArguments().getInt("floor_num",0);
+        System.out.println(floorIndex);
+
         AppManager.getInstance().setFloorFragment(this);
         tableLayout = (TableLayout)view.findViewById(R.id.tableLayout);
         tableLayout.setVerticalScrollBarEnabled(true);
+
+        linearButtonLayout = (LinearLayout)view.findViewById(R.id.linearButton);
 
         goResvBtn = (Button) view.findViewById(R.id.btnGoResv);
         goResvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);
+                intent.putExtra("floor",floorOrder[floorIndex]);
+                intent.putExtra("time",selectTime);
+                intent.putExtra("date",selectDate);
+                intent.putExtra("room",selectRoom);
+                startActivity(intent);
+            }
+        });
+        goDetailBtn = (Button)view.findViewById(R.id.btnGoDetail);
+
+        goDetailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),RoomInformationActivity.class);
+                intent.putExtra("floor",floorOrder[floorIndex]);
+                intent.putExtra("room",selectRoom);
+                startActivity(intent);
                 startActivity(intent);
             }
         });
 
-        final Spinner roomSpinner = (Spinner)view.findViewById(R.id.roomSpinner);
-        jsoupProcess = AppManager.getInstance().getJsoupProcess();
-
-        floorOrder = getArguments().getInt("floor_num",0);
-        System.out.println(floorOrder);
 
         final List<String> roomList = new ArrayList<String>();
         roomList.add("스터디룸 선택");
 
-        if(floorOrder == 3){
+        if(floorIndex == 3){
             roomList.add("교육실");
             roomList.add("진관홀 1");
             roomList.add("진관홀 2");
             roomList.add("진관홀 3");
         }
         else{
-            for(int i=0;i<nRoom[floorOrder];i++){
-                String roomNumString = "Room "+(startNum[floorOrder]+i);
+            for(int i=0;i<nRoom[floorIndex];i++){
+                String roomNumString = "Room "+(startNum[floorIndex]+i);
                 roomList.add(roomNumString);
             }
         }
@@ -104,7 +131,10 @@ public class FloorFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                selectRoom = roomSpinner.getItemAtPosition(i).toString();
+
                 Toast.makeText(getActivity(),""+roomSpinner.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
+                linearButtonLayout.setVisibility(View.GONE);
                 if(i != 0 ) {
                     roomID = roomMap.get(roomSpinner.getItemAtPosition(i));
                     System.out.println(roomID);
@@ -112,7 +142,6 @@ public class FloorFragment extends Fragment {
                     tableLayout.removeAllViews();
                     jsoupProcess.tableInfo(roomID,7);
                 }
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
@@ -189,7 +218,8 @@ public class FloorFragment extends Fragment {
             tableLayout.addView(tableRow);
         }
 
-        goResvBtn.setVisibility(View.VISIBLE);
+        linearButtonLayout.setVisibility(View.VISIBLE);
+
         System.out.println("TEST");
 
         view.invalidate();
