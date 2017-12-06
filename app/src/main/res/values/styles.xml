@@ -34,4 +34,9 @@
         <item name="android:popupBackground">@color/stewColor</item>
     </style>
 
+    <style name="spinner_style_room">
+        <item name="android:background">@drawable/gradient_spinner</item>
+        <item name="android:popupBackground">@color/stewColor</item>
+    </style>
+
 </resources>

@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -11,7 +12,10 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -27,6 +31,7 @@ public class JsoupProcess {
     public static final int MODE_USER = 0;
     public static final int MODE_MYLIST = 1;
     public static final int MODE_LISTDETAIL = 2;
+    public static final int MODE_TABLE = 3;
 
 
     private String htmlPageUrl; //파싱할 홈페이지의 URL주소
@@ -35,12 +40,13 @@ public class JsoupProcess {
     private String selectQuery;
     private String bookID;
 
-    private int mode;
-    private boolean endFlag = false;
-
+    private int mode,floor;
 
     ArrayList<String> myBookList;
     ArrayList<String> myBookIdList;
+
+    ArrayList<String> reserveTableTime;
+    ArrayList<String> reserveTableUser;
 
 
     public JsoupProcess(){
@@ -58,7 +64,7 @@ public class JsoupProcess {
     }
     public void mylistInfo(){
 
-        htmlPageUrl = "https://library.sejong.ac.kr/studyroom/Main.ax";
+        htmlPageUrl = "https://library.sejong.ac.kr/studyroom/List.axa";
         selectQuery = "table.tb01";
         mode = MODE_MYLIST;
 
@@ -80,13 +86,22 @@ public class JsoupProcess {
         jsoupAsyncTask.execute();
     }
 
-    public boolean getEndFlag() {
-        return endFlag;
+    public void tableInfo(int roomID,int f) {
+
+        floor = f;
+        htmlPageUrl = "http://library.sejong.ac.kr/studyroom/BookingTable.axa?roomId="+roomID;
+        selectQuery = "table.tb05 th";
+        mode = MODE_TABLE;
+
+        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+        jsoupAsyncTask.execute();
+
     }
 
     public ArrayList<String> getListString() {
         return myBookList;
     }
+
 
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -96,6 +111,12 @@ public class JsoupProcess {
         }
         @Override
         protected void onPostExecute(Void result) {
+            if(mode == MODE_LISTDETAIL){
+                AppManager.getInstance().getMyListFragment().createBookList(myBookList);
+            }
+            else if(mode ==MODE_TABLE){
+                AppManager.getInstance().getFloorFragment().createTable(reserveTableTime,reserveTableUser);
+            }
         }
         @Override
         protected Void doInBackground(Void... params) {
@@ -120,12 +141,31 @@ public class JsoupProcess {
                     userName = elements.get(0).text();
                     userID = elements.get(3).text();
                     AppManager.getInstance().setUserName(userName);
+
+                    htmlPageUrl = "http://library.sejong.ac.kr/studyRoom/UserFind.axa";
+
+                    String str = Jsoup.connect(htmlPageUrl)
+                            .header("Cookie", cookies)
+                            .header("Origin", "http://library.sejong.ac.kr")
+                            .header("User-Agent", "Mozilla/5.0")
+                            .header("Refer", "http://library.sejong.ac.kr/studyroom/Request.ax?roomId=14")
+                            .data("altPid", userID)
+                            .data("name",userName)
+                            .data("userBlockUser","Y")
+                            .data("year","2017")
+                            .data("month","12")
+                            .data("day","07")
+                            .data("_","")
+                            .post().html();
+
+                    System.out.println(str);
+
                 }
                 else if(mode == MODE_MYLIST){
-                    elements = elements.get(1).select("td a");
+                    elements = elements.get(1).select("td a[href*=goStudyRoomBookingDetail]");
 
-                    for(int i=0;i<elements.size();i=i+2){
-                        String[] tempArray = elements.get(i).attr("href").split("\'");
+                    for(Element e : elements){
+                        String[] tempArray = e.attr("href").split("\'");
                         String bookID = tempArray[1];
                         myBookIdList.add(bookID);
                     }
@@ -140,7 +180,33 @@ public class JsoupProcess {
                         String bookInfo = elements.get(0).text() + "/" + elements.get(5).text() + "/" + elements.get(7).text();
                         myBookList.add(bookInfo);
                     }
-                    endFlag = true;
+                }
+                else if(mode == MODE_TABLE){
+                    SimpleDateFormat dataFormat = new SimpleDateFormat("d", Locale.KOREA);
+                    String today = dataFormat.format(new Date());
+                    int todayNum = Integer.parseInt(today);
+
+                    reserveTableTime = new ArrayList<String>();
+                    reserveTableTime.clear();
+                    reserveTableUser = new ArrayList<String>();
+                    reserveTableUser.clear();
+
+                    for(Element e : elements){
+                        if(e.text().equals("날짜/시간")){
+                            reserveTableTime.add("시간/날짜");
+                        }
+                        else{
+                            reserveTableTime.add(e.text());
+                        }
+                    }
+                    selectQuery = "table.tb05 tr";
+                    document = Jsoup.connect(htmlPageUrl).header("cookie",cookies).get();
+
+                    elements= document.select(selectQuery);
+                    for(int i=0;i<7;i++){
+                        System.out.println(elements.get(i+todayNum).text());
+                        reserveTableUser.add(elements.get(i+todayNum).text());
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
