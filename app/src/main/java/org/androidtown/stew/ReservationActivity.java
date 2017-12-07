@@ -1,5 +1,7 @@
 package org.androidtown.stew;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,8 @@ public class ReservationActivity extends AppCompatActivity {
     int nCount;
     ReservationInfo info;
 
+    String floor,room,time,date;
+
     RecyclerView recyclerView;
     BackgroundWebview webView;
 
@@ -31,6 +35,12 @@ public class ReservationActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        Intent receivedIntent = getIntent();
+        floor = receivedIntent.getStringExtra("floor");
+        room = receivedIntent.getStringExtra("room");
+        time = receivedIntent.getStringExtra("time");
+        date = receivedIntent.getStringExtra("date");
 
         nCount = 1;
         txtRoom = (TextView) findViewById(R.id.txtRoom);
@@ -47,8 +57,9 @@ public class ReservationActivity extends AppCompatActivity {
         info.setHours(1);
         info.setPurpose("dd");
 
-        txtRoom.setText("4층 19번 스터디룸");
-        txtDate.setText("2017. 12. 14 10:00 ~ 11:00");
+
+        txtRoom.setText("위  치 :  "+floor+" "+room);
+        txtDate.setText("일  시 :  "+date + " "+time);
 
         recyclerView = (RecyclerView) findViewById(R.id.resvRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -82,6 +93,12 @@ public class ReservationActivity extends AppCompatActivity {
     public void onReservBtnClicked(View v) {
 
         CustomDialog alert = new CustomDialog(this,0,"스터디룸 예약이 완료되었습니다.");
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                finish();
+            }
+        });
         // test code
         /*int year = 2017;
         int month = 12;

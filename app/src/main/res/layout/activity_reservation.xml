@@ -5,14 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <LinearLayout
-        android:layout_width="300dp"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
+        android:background="@color/stewColor"
+        android:text="예약하기"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/txtRoom"
@@ -30,7 +45,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/resvRecycler"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"/>
         <LinearLayout
@@ -77,6 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="예약하기"
-            android:onClick="onReservBtnClicked"/>
+            android:onClick="onReservBtnClicked"
+            android:background="@drawable/login_button"/>
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>

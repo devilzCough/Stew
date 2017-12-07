@@ -46,7 +46,7 @@
             android:textColorHint="#CDCDCD"
             android:layout_marginTop="45dp"
             android:layout_marginBottom="15dp"
-            android:text="14010969"/>
+            android:text="14010970"/>
 
         <EditText
             android:id="@+id/editPw"
@@ -59,7 +59,7 @@
             android:background="@drawable/login_edit"
             android:textColorHint="#CDCDCD"
             android:padding="10dp"
-            android:text=""/>
+            android:text="2030621"/>
 
         <Button
         android:id="@+id/loginBtn"
