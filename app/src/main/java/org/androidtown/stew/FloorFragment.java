@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -133,7 +132,7 @@ public class FloorFragment extends Fragment {
 
                 selectRoom = roomSpinner.getItemAtPosition(i).toString();
 
-                Toast.makeText(getActivity(),""+roomSpinner.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),""+roomSpinner.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
                 linearButtonLayout.setVisibility(View.GONE);
                 if(i != 0 ) {
                     roomID = roomMap.get(roomSpinner.getItemAtPosition(i));
