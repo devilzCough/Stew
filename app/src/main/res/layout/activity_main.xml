@@ -59,7 +59,7 @@
             android:background="@drawable/login_edit"
             android:textColorHint="#CDCDCD"
             android:padding="10dp"
-            android:text="2030621"/>
+            android:text=""/>
 
         <Button
         android:id="@+id/loginBtn"
